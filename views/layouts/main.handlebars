@@ -15,8 +15,26 @@
 </head>
 
 <body>
-    <nav>
 
+    <nav>
+      <div>
+        FRIENDS EXPENSE
+      </div>
+
+      <div>
+        <a href="/">HOME</a>
+        {{#if loggedIn}}
+          <a href="/events">EVENTS</a>
+        {{/if}}        
+        {{#if loggedIn}}
+          <a href="/account">ACCOUNT</a>
+        {{/if}}
+        <a href="/signup">SIGN UP</a>
+        <a href="/signin">SIGN IN</a>
+        {{#if loggedIn}}
+          <a href="/logout">LOG OUT</a>
+        {{/if}}
+      </div>
     </nav>
 
     <main>
