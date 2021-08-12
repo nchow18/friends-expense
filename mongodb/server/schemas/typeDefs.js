@@ -1,5 +1,66 @@
 const { gql } = require('apollo-server-express');
 
+// Event
+//   title
+//   activities
+//     name
+//     date
+//     time
+//     cost
+//     address
+//     website
+//     map
+//   activity_ideas
+//     name
+//     date
+//     time
+//     cost
+//     address
+//     website
+//     map
+//     votes
+//   itinerary
+//     name
+//     date
+//     day
+//   expense
+//     item
+//     cost
+//     user
+//     paid
+//   meal
+//     date
+//     meal_type
+//     ingredients
+//     prepared_by
+//   meal_idea
+//     votes
+//     meal_name
+//     date
+//     time
+//   groceries
+//     item
+//     added_by
+//     purchased
+//     purchased_by
+//   total_cost
+//   split_cost
+//     name
+//     constribution
+//     owing
+
+// User
+//   first_name
+//   last_name
+//   email
+//   password
+//   admin
+//   phone
+//   events
+//     event_name
+//     date
+  
+
 const typeDefs = gql`
   type User {
     _id: ID
@@ -9,16 +70,6 @@ const typeDefs = gql`
     admin: Boolean
     phone: String
     events: [String]
-  }
-
-  type Cart {
-    product_id: String
-    quantity: Int
-  }
-
-  input CartInput {
-    product_id: String
-    quantity: Int
   }
 
   input UserInput {
@@ -31,271 +82,236 @@ const typeDefs = gql`
     events: [String]
   }
 
-  input UserAccountInput {
-    first_name: String
-    last_name: String
-    email: String
-    password: String
-    admin: Boolean
-    address: [AddressInput]
-    phone: String
-    cart: [String]
-    pastOrders: [String]
-    stripe_customer_id: String
-    stripe_setup_intent: String
-  }
-
-  type Product {
-    _id: ID
-    createdAt: String
-    product_name: String
-    product_category: String
-    product_price: String
-    product_description1: String
-    product_description2: String
-    product_description3: String
-    product_description4: String
-    product_weight: String
-    product_picture: [String]
-    product_nameChinese: String
-    product_descriptionChinese: String
-    product_status: Boolean
-    product_sale_price: String
-    product_bulk_quantity: Int
-    product_bulk_price: String
-    product_featured: Boolean
-    product_views: Int
-    inventory_id: String
-    product_new: Boolean
-  }
-
-  type ProductPicture {
-    product_url: [String]
-  }
-
-  input ProductPictureInput {
-    product_url: [String]
-  }
-
-  input ProductInput {
-    createdAt: String
-    product_name: String
-    product_category: String
-    product_price: String
-    product_description1: String
-    product_description2: String
-    product_description3: String
-    product_description4: String
-    product_weight: String
-    product_picture: [String]
-    product_nameChinese: String
-    product_descriptionChinese: String
-    product_status: Boolean!
-    product_sale_price: String
-    product_bulk_quantity: Int
-    product_bulk_price: String
-    product_featured: Boolean
-    product_views: Int
-    inventory_id: String
-    product_new: Boolean
-  }
-
-  type Order {
-    _id: ID
-    orderTotal: String
-    cart: [String]
-    paid: Boolean
-    delivery_date: String
-    delivery_status: Boolean
-    createdAt: String
-    name: String
-    phone: String
-    address: String
-    order_date: String
-  }
-
-  input OrderInput {
-    orderTotal: String
-    cart: [String]
-    paid: Boolean
-    delivery_date: String
-    delivery_status: Boolean
-    name: String
-    phone: String
-    address: String
-    order_date: String
-  }
-
-  input OrderUpdate {
-    cart: [String]
-  }
-
-  input OrderStatus {
-    delivery_status: Boolean
-  }
-
-  type Address {
-    street_name: String!
-    city: String!
-    street_number: String!
-    postal_code: String!
-    region: String!
-    state: String!
-  }
-
-  input AddressInput {
-    street_name: String!
-    city: String!
-    street_number: String!
-    postal_code: String!
-    region: String!
-    state: String!
-  }
-
-  type Promo {
-    _id: ID
-    promoMsg1: String
-    promo1Start: String
-    promo1End: String
-    promoMsg2: String
-    promo2Start: String
-    promo2End: String
-    promoMsg3: String
-    promo3Start: String
-    promo3End: String
-    mainPromo: String
-    promoPicture1: String
-    promoPicture2: String
-    promoPicture3: String
-    discount: String
-    featuredProduct1: String
-    featuredProduct2: String
-    featuredProduct3: String
-    contact_us_1: String
-    contact_us_2: String
-    address: String
-    home_message: String
-    main_banner: String
-    delivery_fee1: String,
-    delivery_fee2: String,
-    delivery_fee3: String,
-    notice_message: String
-  }
-
-  input PromoInput {
-    promoMsg1: String
-    promo1Start: String
-    promo1End: String
-    promoMsg2: String
-    promo2Start: String
-    promo2End: String
-    promoMsg3: String
-    promo3Start: String
-    promo3End: String
-    mainPromo: String
-    promoPicture1: String
-    promoPicture2: String
-    promoPicture3: String
-    discount: String
-    featuredProduct1: String
-    featuredProduct2: String
-    featuredProduct3: String
-    contact_us_1: String
-    contact_us_2: String
-    address: String
-    home_message: String
-    main_banner: String
-    delivery_fee1: String,
-    delivery_fee2: String,
-    delivery_fee3: String,
-    notice_message: String
-  }
-
-  type Customer {
-    id: String
-    object: String
-    address: stripeAddress
-    balance: Float
-    currency: String
-    description: String
-    email: String
-    name: String
-    phone: String
-  }
-
-  type stripeAddress {
-    city: String
-    country: String
-    line1: String
-    line2: String
-    postal_code: String
-    state: String
-  }
-
-  type Charge {
-    id: String
-    object: String
-    amount: Int
-    receipt_url: String
-    status: String
-  }
-
-  type Payment{
-    id: String
-    amount: Int
-    created: Int
-    currency: String
-    description: String
-    status: String
-  }
-
-  type Payments {
-    data: [Payment]
-  }
-
   type Auth {
     token: ID!
     user: User
+  }
+  
+  type Events {
+    _id: ID
+    title: String
+    activities: [Activities]
+    activity_ideas: [Activity_Ideas]
+    itinerary: [Itinerary]
+    expense: [Expense]
+    meal: [Meal]
+    meal_ideas: [Meal_Ideas]
+    groceries: [Groceries]
+    total_cost: String
+    split_cost: [Split_Cost]
+  }
+
+  type Activities {
+    _id: ID
+    name: String
+    date: String
+    time: String
+    cost: String
+    address: String
+    website: String
+    map: String
+  }
+
+  type Activity_Ideas {
+    _id: ID
+    name: String
+    date: String
+    time: String
+    cost: String
+    address: String
+    website: String
+    map: String
+    votes: [String]
+  }
+
+  type Itinerary {
+    name: String
+    date: String
+    day: [Day]
+  }
+
+  type Day {
+    slot_12_am: String
+    slot_1_am: String
+    slot_2_am: String
+    slot_3_am: String
+    slot_4_am: String
+    slot_5_am: String
+    slot_6_am: String
+    slot_7_am: String
+    slot_8_am: String
+    slot_9_am: String
+    slot_10_am: String
+    slot_11_am: String
+    slot_12_pm: String
+    slot_1_pm: String
+    slot_2_pm: String
+    slot_3_pm: String
+    slot_4_pm: String
+    slot_5_pm: String
+    slot_6_pm: String
+    slot_7_pm: String
+    slot_8_pm: String
+    slot_9_pm: String
+    slot_10_pm: String
+    slot_11_pm: String
+  }
+
+  type Expense {
+    item: String
+    cost: String
+    user: String
+    paid: Boolean
+  }
+
+  type Meal {
+    date: String
+    meal_type: String
+    ingredients: [String]
+    time: String
+    prepared_by: [String]
+  }
+
+  type Meal_Ideas {
+    votes: [String]
+    meal_name: String
+    meal_type: String
+    date: String
+    time: String
+  }
+
+  type Groceries {
+    item: String
+    added_by: String
+    purchased: Boolean
+    purchased_by: String
+  }
+
+  type Split_Cost {
+    name: String
+    contributions: String
+    owing: String
+  }
+
+
+
+
+  input EventsInput {
+    _id: ID
+    title: String
+    activities: [ActivitiesInput]
+    activity_ideas: [Activity_IdeasInput]
+    itinerary: [ItineraryInput]
+    expense: [ExpenseInput]
+    meal: [MealInput]
+    meal_ideas: [Meal_IdeasInput]
+    groceries: [GroceriesInput]
+    total_cost: String
+    split_cost: [Split_CostInput]
+  }
+
+  input ActivitiesInput {
+    _id: ID
+    name: String
+    date: String
+    time: String
+    cost: String
+    address: String
+    website: String
+    map: String
+  }
+
+  input Activity_IdeasInput {
+    _id: ID
+    name: String
+    date: String
+    time: String
+    cost: String
+    address: String
+    website: String
+    map: String
+    votes: [String]
+  }
+
+  input ItineraryInput {
+    name: String
+    date: String
+    day: [DayInput]
+  }
+
+  input DayInput {
+    slot_12_am: String
+    slot_1_am: String
+    slot_2_am: String
+    slot_3_am: String
+    slot_4_am: String
+    slot_5_am: String
+    slot_6_am: String
+    slot_7_am: String
+    slot_8_am: String
+    slot_9_am: String
+    slot_10_am: String
+    slot_11_am: String
+    slot_12_pm: String
+    slot_1_pm: String
+    slot_2_pm: String
+    slot_3_pm: String
+    slot_4_pm: String
+    slot_5_pm: String
+    slot_6_pm: String
+    slot_7_pm: String
+    slot_8_pm: String
+    slot_9_pm: String
+    slot_10_pm: String
+    slot_11_pm: String
+  }
+
+  input ExpenseInput {
+    item: String
+    cost: String
+    user: String
+    paid: Boolean
+  }
+
+  input MealInput {
+    date: String
+    meal_type: String
+    ingredients: [String]
+    time: String
+    prepared_by: [String]
+  }
+
+  input Meal_IdeasInput {
+    votes: [String]
+    meal_name: String
+    meal_type: String
+    date: String
+    time: String
+  }
+
+  input GroceriesInput {
+    item: String
+    added_by: String
+    purchased: Boolean
+    purchased_by: String
+  }
+
+  input Split_CostInput {
+    name: String
+    contributions: String
+    owing: String
   }
 
   type Query {
     user(user_id: ID!): User
     users: [User]
     userMe: User
-
-    product(product_id: ID!): Product
-    products: [Product]
-
-    order(order_id: ID!): Order
-    orders: [Order]
-
-    promo: [Promo]
   }
 
   type Mutation {
     addUser(input: UserInput): Auth
     login(email: String!, password: String!): Auth
-    addCart(input: [CartInput]): User
-    updateCart(quantity: Int, product_id: String!): User
-    removeCart(product_id: ID!): User
-    updateUser(input: UserAccountInput): User
-    addProduct(input: ProductInput!): Product
-    removeProductPicture(product_id: String!, product_url: String): Product
-    addProductPicture(product_url: String, product_id: String!): Product
-    addProductView(product_id: String): Product
-    updateProductPicture(product_url: String, product_id: String!, product_old_url: String!): Product
-    updateProduct(input: ProductInput!, product_id: ID!): Product
-    removeProduct(product_id: ID!): Product
-    addOrder(input: OrderInput): Order
-    updateOrder(input: OrderUpdate, order_id: ID!): Order
-    removeOrder(order_id: String!): Order
-    updateOrderStatus(input: OrderStatus, order_id: ID!): Order
-    createPromo(input: PromoInput): Promo
-    updatePromo(input: PromoInput, promo_id: ID!): Promo
-    updateUserAccount(input: UserInput, user_id: ID!): User
-    updateUserAddress(input: AddressInput, user_id: ID!): User
-    addUserOrder(input: UserOrders): User
-    clearCart(user_id: String): User
+
   }
 
 `;

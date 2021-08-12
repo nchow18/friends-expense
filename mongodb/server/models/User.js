@@ -1,6 +1,20 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const addressSchema = require('./Address');
+
+const userEventSchema = new Schema(
+  {
+    event_name: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    date: {
+      type: String,
+      required: true,
+      trim: true
+    }
+  }
+)
 
 const userSchema = new Schema(
     {
@@ -30,9 +44,9 @@ const userSchema = new Schema(
             default: false
         },
         phone: {
-            type: String
+            type: Number
         },
-        events: [String],
+        events: [userEventSchema],
     },
     {
       toJSON: {

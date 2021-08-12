@@ -49,25 +49,32 @@ const activitiesSchema = new Schema(
 const activity_ideasSchema = new Schema(
   {
     name: {
-      type: String
+      type: String,
+      trim: true
     },
     date: {
-      type: String
+      type: String,
+      trim: true
     },
     time: {
-      type: String
+      type: String,
+      trim: true
     },
     cost: {
-      type: String
+      type: String,
+      trim: true
     },
     address: {
-      type: String
+      type: String,
+      trim: true
     },
     website: {
-      type: String
+      type: String,
+      trim: true
     },
     map: {
-      type: String
+      type: String,
+      trim: true
     },
     votes: [String]
   },
@@ -168,9 +175,12 @@ const mealSchema = new Schema(
       trim: true
     },
     ingredients: [String],
-    time: String,
-    required: false,
-    trim: true
+    time: {
+      type: String,
+      required: false,
+      trim: true
+    },
+    prepared_by: [String]
   },
   {
     toJSON: {
@@ -188,7 +198,7 @@ const meal_ideaSchema = new Schema(
       trim: true
     },
     meal_type: {
-      String,
+      type: String,
       required: false,
       trim: true
     },
@@ -225,7 +235,12 @@ const groceriesSchema = new Schema(
     purchased: {
       type: Boolean,
       required: true,
-      defaut: false,
+      default: false,
+      trim: true
+    },
+    purchased_by: {
+      type: String,
+      required: false,
       trim: true
     }
   },
@@ -236,15 +251,20 @@ const groceriesSchema = new Schema(
   }
 );
 
-const total_costSchema = new Schema(
+const split_costSchema = new Schema(
   {
-    total_cost: {
+    name: {
       type: String,
       required: false,
       trim: true
     },
-    split: {
-      type: [String],
+    contribution: {
+      type: String,
+      required: false,
+      trim: true
+    },
+    owing: {
+      type: String,
       required: false,
       trim: true
     }
@@ -256,7 +276,7 @@ const eventSchema = new Schema(
       title: {
         type: String,
         required: true,
-        trim: true,
+        trim: true
       },
       activities: [activitiesSchema],
       activity_ideas: [activity_ideasSchema],
@@ -265,7 +285,12 @@ const eventSchema = new Schema(
       meal: [mealSchema],
       meal_idea: [meal_ideaSchema],
       groceries: [groceriesSchema],
-      total_cost: [total_costSchema]
+      total_cost: {
+        type: String,
+        required: false,
+        trim: true
+      },
+      split_cost: [split_costSchema]
     },
     {
       toJSON: {
@@ -274,6 +299,6 @@ const eventSchema = new Schema(
     }
 );
 
-const eventSchema = model('Event', eventSchema);
+const Events = model('Event', eventSchema);
 
-module.exports = Event;
+module.exports = Events;

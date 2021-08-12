@@ -1,8 +1,8 @@
 {
-  "name": "king-seafood",
+  "name": "friends-expense",
   "version": "1.0.0",
   "description": "",
-  "homepage": "http://nathanchow.ca",
+  "homepage": "",
   "main": "index.js",
   "dependencies": {
     "if-env": "^1.0.4",
@@ -21,11 +21,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nchow18/king-seafood-app.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nchow18/king-seafood-app/issues"
+    "url": ""
   }
 }
