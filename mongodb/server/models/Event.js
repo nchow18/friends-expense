@@ -9,9 +9,9 @@ const activitiesSchema = new Schema(
       trim: true
     },
     date: {
-      type: Date,
-      default: Date.now,
-      get: timestamp => dateFormate(timestamp)
+      type: String,
+      required: false,
+      trim: true
     },
     time: {
       type: String,
@@ -36,6 +36,11 @@ const activitiesSchema = new Schema(
     map: {
       type: String,
       required: false,
+      trim: true
+    },
+    event_id: {
+      type: String,
+      required: true,
       trim: true
     }
   },
@@ -76,7 +81,12 @@ const activity_ideasSchema = new Schema(
       type: String,
       trim: true
     },
-    votes: [String]
+    votes: [String],
+    event_id: {
+      type: String,
+      required: true,
+      trim: true
+    }
   },
   {
     toJSON: {
@@ -122,7 +132,12 @@ const itinerarySchema = new Schema(
         slot_10_pm: String,
         slot_11_pm: String,
       }
-    ]
+    ],
+    event_id: {
+      type: String,
+      required: true,
+      trim: true
+    }
   },
   {
     toJSON: {
@@ -153,6 +168,11 @@ const expenseSchema = new Schema(
       required: true,
       trim: true,
       default: false
+    },
+    event_id: {
+      type: String,
+      required: true,
+      trim: true
     }
   },
   {
@@ -180,7 +200,12 @@ const mealSchema = new Schema(
       required: false,
       trim: true
     },
-    prepared_by: [String]
+    prepared_by: [String],
+    event_id: {
+      type: String,
+      required: true,
+      trim: true
+    }
   },
   {
     toJSON: {
@@ -210,6 +235,11 @@ const meal_ideaSchema = new Schema(
     time: {
       type: String,
       required: false,
+      trim: true
+    },
+    event_id: {
+      type: String,
+      required: true,
       trim: true
     }
   },
@@ -242,6 +272,11 @@ const groceriesSchema = new Schema(
       type: String,
       required: false,
       trim: true
+    },
+    event_id: {
+      type: String,
+      required: true,
+      trim: true
     }
   },
   {
@@ -267,6 +302,11 @@ const split_costSchema = new Schema(
       type: String,
       required: false,
       trim: true
+    },
+    event_id: {
+      type: String,
+      required: true,
+      trim: true
     }
   }
 );
@@ -276,6 +316,11 @@ const eventSchema = new Schema(
       title: {
         type: String,
         required: true,
+        trim: true
+      },
+      notes: {
+        type: String,
+        required: false,
         trim: true
       },
       activities: [activitiesSchema],
@@ -290,7 +335,12 @@ const eventSchema = new Schema(
         required: false,
         trim: true
       },
-      split_cost: [split_costSchema]
+      split_cost: [split_costSchema],
+      event_id: {
+        type: String,
+        required: true,
+        trim: true
+      }
     },
     {
       toJSON: {
@@ -299,6 +349,6 @@ const eventSchema = new Schema(
     }
 );
 
-const Events = model('Event', eventSchema);
+const Event = model('Event', eventSchema);
 
-module.exports = Events;
+module.exports = Event;
