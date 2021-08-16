@@ -1,0 +1,108 @@
+.account-page {
+  padding: 1rem;
+}
+
+.account-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-container > div:nth-child(1) {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.account-container > div:nth-child(1) > span {
+  padding: .5rem;
+  margin: .5rem .5rem 0 .5rem;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.account-container > div:nth-child(1) > span:hover {
+  background-color: black;
+  color: white;
+}
+
+.account-contents {
+  border-top: 1px solid black;
+  padding: 1rem;
+}
+
+.account-category-active {
+  background-color: black;
+  color: white;
+}
+
+/* ACCOUNT DETAILS */
+
+.account-details-container > form {
+  display: flex;
+  flex-direction: column;
+  max-width: 20rem;
+  margin: 1rem 0;
+}
+
+.account-details-container > form > input {
+  margin-bottom: 1rem;
+}
+
+.account-details-container > form > label {
+  font-weight: bold;
+  margin-bottom: .25rem;
+}
+
+/* EVENTS CONTAINER */
+
+.events-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.events-container > span:nth-child(1) {
+  margin-bottom: 1rem;
+}
+
+.event-button {
+  border: 1px solid black;
+  margin: .25rem;
+  padding: .25rem;
+  border-radius: 10px;
+}
+
+.event-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.events-container > div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+}
+
+.event-list {
+  width: 15rem;
+  box-shadow: 10px 10px 20px rgb(0,0,0,0.6);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 15px;
+}
+
+.event-display {
+  box-shadow: 10px 10px 20px rgb(0,0,0,0.6);
+  padding: 1rem;
+  margin: 1rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+}

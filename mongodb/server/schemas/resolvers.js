@@ -68,7 +68,7 @@ const resolvers = {
             )
             return updateUser;
           }
-          throw AuthencationError('Not Logged In')
+          throw new AuthenticationError('Not Logged In')
         },
 
         addEvent: async (parent, { input }, context) => {
@@ -100,6 +100,7 @@ const resolvers = {
             );
             return updateEvent
           }
+          throw new AuthenticationError('Not Logged In')
         },
 
         removeActivities: async (parent, { event_id, activity_id }, context) => {
@@ -136,7 +137,7 @@ const resolvers = {
             );
             return updateEvent;
           }
-          throw AuthenticationError('Not Logged In');
+          throw new AuthenticationError('Not Logged In');
         },
 
         addItinerary: async (parent, { input }, context) => {
@@ -160,7 +161,7 @@ const resolvers = {
             );
             return updateEvent;
           }
-          throw AuthenticationError('Not Logged In');
+          throw new AuthenticationError('Not Logged In');
         },
 
         updateItinerary: async (parent, { event_id, itinerary_id, input }, context) => {
@@ -178,7 +179,7 @@ const resolvers = {
             )
             return updateEvent;
             }
-          throw AuthenticationError('Not Logged In');
+          throw new AuthenticationError('Not Logged In');
         },
 
         addExpense: async (parent, { input }, context) => {
@@ -190,7 +191,7 @@ const resolvers = {
             );
             return updateEvent;
           }
-          throw AuthenticationError('Not Logged In');
+          throw new AuthenticationError('Not Logged In');
         },
 
         removeExpense: async (parent, { event_id, expense_id }, context) => {
@@ -214,7 +215,7 @@ const resolvers = {
           );
           return updateEvent;
         }
-        throw AuthenticationError('Not Logged In');
+        throw new AuthenticationError('Not Logged In');
       },
 
       addMealIdeas: async (parent, { input }, context) => {
@@ -226,7 +227,7 @@ const resolvers = {
           )
           return updateEvent;
         }
-        throw AuthenticationError('Not Logged In');
+        throw new AuthenticationError('Not Logged In');
       },
 
       addGroceries: async (parent, { input }, context) => {
@@ -238,7 +239,7 @@ const resolvers = {
           )
           return updateEvent
         }
-        throw AuthenticationError('Not Logged In');
+        throw new AuthenticationError('Not Logged In');
       },
 
       removeGroceries: async (parent, { event_id, groceries_id }, context) => {
@@ -249,7 +250,7 @@ const resolvers = {
           )
           return updateEvent;
         }
-        throw AuthenticationError('Not Logged In');
+        throw new AuthenticationError('Not Logged In');
       },
 
       addSplitCost: async (parent, { input }, context) => {
@@ -260,7 +261,7 @@ const resolvers = {
           )
           return updateEvent;
         }
-        throw AuthenticationError('Not Logged In');
+        throw new AuthenticationError('Not Logged In');
       },
 
       updateSplitCost: async (parent, { split_cost_id, event_id, input }, context) => {
@@ -273,7 +274,7 @@ const resolvers = {
           )
           return updateEvent;
         }
-        throw AuthenticationError('Not Logged In')
+        throw new AuthenticationError('Not Logged In')
       }
     }
 };

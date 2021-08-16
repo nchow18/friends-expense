@@ -33,6 +33,90 @@ query {userMe {
     event_id
   }
 }
+}
+`;
+
+export const EVENTS = gql`
+query {
+  events {
+    _id
+    event_id
+    title
+    notes
+    activities {
+      _id
+      name
+      date
+      time
+      cost
+      address
+      website
+      map
+      event_id
+    }
+    activity_ideas {
+      _id
+      name
+      date
+      time
+      cost
+      address
+      website
+      map
+      votes
+      event_id
+    }
+    itinerary {
+      _id
+      name
+      date
+      time
+      event_id
+    }
+    expense {
+      _id
+      item
+      cost
+      user
+      paid
+      event_id
+    }
+    meal {
+      _id
+      date
+      meal_type
+      ingredients
+      time
+      prepared_by
+      event_id
+    }
+    meal_ideas {
+      _id
+      votes
+      meal_name
+      meal_type
+      date
+      time
+      event_id
+    }
+    groceries {
+      _id
+      item
+      added_by
+      purchased
+      purchased_by
+      event_id
+    }
+    total_cost
+    split_cost {
+      _id
+      name
+      contributions
+      owing
+      event_id
+    }
+  }
+}
 `;
 
 export const EVENT = gql`

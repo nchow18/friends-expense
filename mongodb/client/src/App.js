@@ -5,7 +5,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Auth from './utils/auth';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Login from './pages/Login';
 import Home from './pages/Home';
+import Account from './pages/Account';
+
 import './css/App.css';
 
 const client = new ApolloClient({
@@ -22,7 +25,6 @@ const client = new ApolloClient({
 
 function App() {
 
-
   Auth.checkToken();
 
   return (
@@ -33,13 +35,19 @@ function App() {
               <Header />
             </div>
 
-            <Switch>
-              <div className="content">
-              <Route 
-                exact path="/"
-                render={() => <Home />} />
-              </div>
-            </Switch>
+            <div className="content">
+              <Switch> 
+                <Route 
+                  exact path="/"
+                  render={() => <Home />} />
+                <Route 
+                  exact path="/login"
+                  render={() => <Login />} />
+                <Route
+                  exact path="/account"
+                  render={() => <Account />} />
+              </Switch>
+            </div>
 
             <div className="footer">
               <Footer />

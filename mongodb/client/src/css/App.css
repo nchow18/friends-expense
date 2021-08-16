@@ -5,6 +5,14 @@
   width: 100%;
 }
 
+.content {
+  padding: 1rem;
+}
+
+.footer {
+  padding: 1rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
