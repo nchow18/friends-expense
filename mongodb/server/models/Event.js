@@ -95,6 +95,21 @@ const activity_ideasSchema = new Schema(
   }
 );
 
+// const daySchema = new Schema(
+//   {
+//     time: {
+//       type: String,
+//       required: true,
+//       trim: true
+//     },
+//     description: {
+//       type: String,
+//       required: true,
+//       trim: true
+//     }
+//   }
+// )
+
 const itinerarySchema = new Schema(
   {
     name: {
@@ -105,34 +120,11 @@ const itinerarySchema = new Schema(
       required: true,
       trim: true
     },
-    day: [
-      {
-        slot_12_am: String,
-        slot_1_am: String,
-        slot_2_am: String,
-        slot_3_am: String,
-        slot_4_am: String,
-        slot_5_am: String,
-        slot_6_am: String,
-        slot_7_am: String,
-        slot_8_am: String,
-        slot_9_am: String,
-        slot_10_am: String,
-        slot_11_am: String,
-        slot_12_pm: String,
-        slot_1_pm: String,
-        slot_2_pm: String,
-        slot_3_pm: String,
-        slot_4_pm: String,
-        slot_5_pm: String,
-        slot_6_pm: String,
-        slot_7_pm: String,
-        slot_8_pm: String,
-        slot_9_pm: String,
-        slot_10_pm: String,
-        slot_11_pm: String,
-      }
-    ],
+    time: {
+      type: String,
+      requried: true,
+      trim: true
+    },
     event_id: {
       type: String,
       required: true,

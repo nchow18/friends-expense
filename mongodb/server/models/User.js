@@ -12,6 +12,11 @@ const userEventSchema = new Schema(
       type: String,
       required: true,
       trim: true
+    },
+    event_id: {
+      type: String,
+      required: true,
+      trim: true
     }
   }
 )

@@ -69,7 +69,14 @@ const typeDefs = gql`
     email: String
     admin: Boolean
     phone: String
-    events: [String]
+    events: [Events]
+  }
+
+  type Events {
+    _id: ID
+    event_name: String
+    date: String
+    event_id: String
   }
 
   input UserInput {
@@ -79,7 +86,7 @@ const typeDefs = gql`
     password: String
     admin: Boolean
     phone: String
-    events: [String]
+    events: [UserEventInput]
   }
 
   type Auth {
@@ -132,36 +139,7 @@ const typeDefs = gql`
     _id: ID
     name: String
     date: String
-    day: [Day]
-    event_id: String
-  }
-
-  type Day {
-    _id: ID
-    slot_12_am: String
-    slot_1_am: String
-    slot_2_am: String
-    slot_3_am: String
-    slot_4_am: String
-    slot_5_am: String
-    slot_6_am: String
-    slot_7_am: String
-    slot_8_am: String
-    slot_9_am: String
-    slot_10_am: String
-    slot_11_am: String
-    slot_12_pm: String
-    slot_1_pm: String
-    slot_2_pm: String
-    slot_3_pm: String
-    slot_4_pm: String
-    slot_5_pm: String
-    slot_6_pm: String
-    slot_7_pm: String
-    slot_8_pm: String
-    slot_9_pm: String
-    slot_10_pm: String
-    slot_11_pm: String
+    time: String
     event_id: String
   }
 
@@ -212,6 +190,11 @@ const typeDefs = gql`
   }
 
 
+  input UserEventInput {
+    event_id: String
+    event_name: String
+    date: String
+  }
 
   input EventInput {
     event_id: String
@@ -254,35 +237,7 @@ const typeDefs = gql`
   input ItineraryInput {
     name: String
     date: String
-    day: [DayInput]
-    event_id: String
-  }
-
-  input DayInput {
-    slot_12_am: String
-    slot_1_am: String
-    slot_2_am: String
-    slot_3_am: String
-    slot_4_am: String
-    slot_5_am: String
-    slot_6_am: String
-    slot_7_am: String
-    slot_8_am: String
-    slot_9_am: String
-    slot_10_am: String
-    slot_11_am: String
-    slot_12_pm: String
-    slot_1_pm: String
-    slot_2_pm: String
-    slot_3_pm: String
-    slot_4_pm: String
-    slot_5_pm: String
-    slot_6_pm: String
-    slot_7_pm: String
-    slot_8_pm: String
-    slot_9_pm: String
-    slot_10_pm: String
-    slot_11_pm: String
+    time: String
     event_id: String
   }
 
@@ -338,12 +293,13 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(input: UserInput): Auth
+    addUserEvent(input: UserEventInput): User
     login(email: String!, password: String!): Auth
     addEvent(input: EventInput): Event
     addActivities(input: ActivitiesInput): Activities
     addActivityIdeas(input: Activity_IdeasInput): Activity_Ideas
     addItinerary(input: ItineraryInput): Itinerary
-    addDay(input: DayInput): Day
+    updateItinerary( event_id: String, itinerary_id: String, input: ItineraryInput): Itinerary
     addExpense(input: ExpenseInput): Expense
     addMeal(input: MealInput): Meal
     addMealIdeas(input: Meal_IdeasInput): Meal_Ideas
@@ -353,11 +309,11 @@ const typeDefs = gql`
     removeActivities(event_id: String, activity_id: String): Activities
     removeActivityIdea(event_id: String, activity_idea_id: String): Activity_Ideas
     removeItinerary(event_id: String, itinerary_id: String): Itinerary
-    updateDay(event_id: String, itinerary_id: String, day_id: String): Day
     removeExpense(event_id: String, expense_id: String): Expense
     removeMeal(event_id: String, meal_id: String): Meal
     removeMealIdea(event_id: String, meal_idea_id: String): Meal_Ideas
     removeGroceries(event_id: String, groceries_id: String): Groceries
+    updateSplitCost(split_cost_id: String, event_id: String, input: Split_CostInput): Split_Cost
   }
 
 `;

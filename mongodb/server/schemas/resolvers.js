@@ -59,6 +59,18 @@ const resolvers = {
             return { token, user }
         },
 
+        addUserEvent: async (parent, { input }, context) => {
+          if(context.user) {
+            const updateUser = await User.findByIdAndUpdate(
+              context.user._id,
+              { $push: { events: input }},
+              { new: true }
+            )
+            return updateUser;
+          }
+          throw AuthencationError('Not Logged In')
+        },
+
         addEvent: async (parent, { input }, context) => {
           if (context.user) {
             const event = await Event.create(input)
@@ -151,40 +163,117 @@ const resolvers = {
           throw AuthenticationError('Not Logged In');
         },
 
-        addDay: async (parent, { input }, context) => {
+        updateItinerary: async (parent, { event_id, itinerary_id, input }, context) => {
+          if (context.user) {
+
+            await Event.findByIdAndUpdate(
+              event_id,
+              { $pull: { itinerary: { _id: { $in: [ itinerary_id ] }}}},
+            );
+
+            const updateEvent = await Event.findByIdAndUpdate(
+              event_id,
+              { $push: { itinerary: input }},
+              { new: true }
+            )
+            return updateEvent;
+            }
+          throw AuthenticationError('Not Logged In');
+        },
+
+        addExpense: async (parent, { input }, context) => {
           if (context.user) {
             const updateEvent = await Event.findByIdAndUpdate(
               input.event_id,
-              { $push: { itinerary: { day: input }}}
+              { $push: { expense: input }},
+              { new: true}
             );
             return updateEvent;
           }
           throw AuthenticationError('Not Logged In');
         },
 
-        updateDay: async (parent, { event_id, day_id, itinerary_id }, context) => {
+        removeExpense: async (parent, { event_id, expense_id }, context) => {
           if (context.user) {
-            const event = await Event.findById(event_id)
+            const updateEvent = await Event.findByIdAndUpdate(
+              event_id,
+              { $pull: { expense: { _id: { $in: [ expense_id ] }}}},
+              { new: true }
+            );
+            return updateEvent;
+          }
+          throw AuthenticationError('Not Logged In');
+        },
 
-            const new_itinerary = [];
-
-            //find array position
-            for (var i = 0; i < event.itinerary.length; i++) {
-              console.log(event.itinerary[i]._id)
-              if (event.itinerary[i]._id === itinerary_id) {
-                console.log('array ' + i);
-                return;
-              }
-            }
-
-            // const updateEvent = await Event.findByIdAndUpdate(
-            //   event_id,
-            //   { $pull: { itinerary: { _id: { $in: [ itinerary_id ]}}}}
-            // );
-            // return updateEvent;
-            // }
-            // throw AuthenticationError('Not Logged In');
+      addMeal: async (parent, { input }, context) => {
+        if (context.user) {
+          const updateEvent = await Event.findByIdAndUpdate(
+            input.event_id,
+            { $push: { meal: input }},
+            { new: true }
+          );
+          return updateEvent;
         }
+        throw AuthenticationError('Not Logged In');
+      },
+
+      addMealIdeas: async (parent, { input }, context) => {
+        if (context.user) {
+          const updateEvent = await Event.findByIdAndUpdate(
+            input.event_id,
+            { $push: { meal_ideas: input }},
+            { new: true }
+          )
+          return updateEvent;
+        }
+        throw AuthenticationError('Not Logged In');
+      },
+
+      addGroceries: async (parent, { input }, context) => {
+        if (context.user) {
+          const updateEvent = await Event.findByIdAndUpdate(
+            input.event_id,
+            { $input: { groceries: input }},
+            { new: true }
+          )
+          return updateEvent
+        }
+        throw AuthenticationError('Not Logged In');
+      },
+
+      removeGroceries: async (parent, { event_id, groceries_id }, context) => {
+        if (context.user) {
+          const updateEvent = await Event.findByIdAndUpdate(
+            event_id,
+            { $pull: { groceries: { _id: { $in: [ groceries_id ] }}}}
+          )
+          return updateEvent;
+        }
+        throw AuthenticationError('Not Logged In');
+      },
+
+      addSplitCost: async (parent, { input }, context) => {
+        if (context.user) {
+          const updateEvent = await Event.findByIdAndUpdate(
+            input.event_id,
+            { $push: { split_cost: input }}
+          )
+          return updateEvent;
+        }
+        throw AuthenticationError('Not Logged In');
+      },
+
+      updateSplitCost: async (parent, { split_cost_id, event_id, input }, context) => {
+        if (context.user) {
+          const updateEvent = await Event.findByIdAndUpdate(
+            event_id,
+            { $pull: { split_cost: { _id: { $in: [ split_cost_id ] }}}},
+            { $push: { split_cost: input }},
+            { new: true }
+          )
+          return updateEvent;
+        }
+        throw AuthenticationError('Not Logged In')
       }
     }
 };

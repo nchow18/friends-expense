@@ -10,18 +10,9 @@ query user($user_id: ID!) {
     first_name
     last_name
     email
-		phone
-    cart {
-      product_id
-      quantity
-    }
-    address{
-      street_name
-      street_number
-      city
-      region
-      state
-      postal_code
+    phone
+    events {
+      event_name
     }
   }
 }
