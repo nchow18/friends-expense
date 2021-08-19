@@ -66,7 +66,7 @@ export const ADD_EVENT = gql`
   }
 `;
 
-export const ADD_ACIVITY = gql`
+export const ADD_ACTIVITY = gql`
   mutation addActivities($input: ActivitiesInput) {
     addActivities(input:$input) {
       _id
@@ -176,8 +176,8 @@ export const REMOVE_ACTIVITY = gql`
 `;
 
 export const REMOVE_ACTIVITY_IDEA = gql`
-  mutation removeActivityIdea($event_id: String, $activity_id: String) {
-    removeActivityIdea(event_id: $event_id, activity_id: $activity_id) {
+  mutation removeActivityIdea($event_id: String, $activity_idea_id: String) {
+    removeActivityIdea(event_id: $event_id, activity_idea_id: $activity_idea_id) {
       _id
     }
   }
@@ -226,6 +226,14 @@ export const REMOVE_GROCERY = gql`
 export const UPDATE_SPLIT_COST = gql`
   mutation updateSplitCost($split_cost_id: String, $event_id: String, $input: Split_CostInput) {
     updateSplitCost(split_cost_id: $split_cost_id, event_id: $event_id, input: $input) {
+      _id
+    }
+  }
+`;
+
+export const UPDATE_ACTIVITY_IDEA = gql`
+  mutation updateActivityIdeaVote($input: UpdateActivityIdeasInput, $event_id: String, $activity_idea_id: String) {
+    updateActivityIdeaVote(input: $input, event_id: $event_id, activity_idea_id:$activity_idea_id) {
       _id
     }
   }

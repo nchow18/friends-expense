@@ -275,6 +275,19 @@ const resolvers = {
           return updateEvent;
         }
         throw new AuthenticationError('Not Logged In')
+      },
+
+      updateActivityIdeaVote: async (parent, { input, event_id }, context) => {
+        if (context.user) {
+          const updateEvent = await Event.findByIdAndUpdate(
+            event_id,
+            { $pull: { activity_ideas: { _id: { $in: [ activity_idea_id ] }}}},
+            { $push: { activity_ideas: input }},
+            { new: true }
+          )
+          return updateEvent;
+        }
+        throw new AuthenticationError('Not Logged In')
       }
     }
 };

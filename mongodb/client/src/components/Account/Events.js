@@ -23,13 +23,14 @@ function Events(props) {
       <div>
         <div className="event-list">
           {user_me.events.map((event) => (
-            <span onClick={() => {setCurrentEvent(event)}} className="event-button" key={event.event_name}>{event.event_name} <b>></b></span>
+            <span key={event.event_name} onClick={() => {setCurrentEvent(event)}} className="event-button" key={event.event_name}>{event.event_name} <b></b></span>
           ))}          
         </div>
         <div className="event-display">
           <EventPage 
             currentEvent={currentEvent}
-            all_events={all_events} />
+            all_events={all_events}
+            user_me={user_me} />
         </div>
 
       </div>

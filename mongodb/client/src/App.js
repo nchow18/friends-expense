@@ -43,9 +43,11 @@ function App() {
                 <Route 
                   exact path="/login"
                   render={() => <Login />} />
-                <Route
-                  exact path="/account"
-                  render={() => <Account />} />
+                  {Auth.loggedIn() === true && (
+                    <Route
+                      exact path="/account"
+                      render={() => <Account />} />
+                  )}
               </Switch>
             </div>
 

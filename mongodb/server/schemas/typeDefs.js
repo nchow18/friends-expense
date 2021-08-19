@@ -234,6 +234,18 @@ const typeDefs = gql`
     event_id: String
   }
 
+  input UpdateActivityIdeasInput {
+    name: String
+    date: String
+    time: String
+    cost: String
+    address: String
+    website: String
+    map: String
+    votes: [String]
+    event_id: String
+  }
+
   input ItineraryInput {
     name: String
     date: String
@@ -314,6 +326,7 @@ const typeDefs = gql`
     removeMealIdea(event_id: String, meal_idea_id: String): Meal_Ideas
     removeGroceries(event_id: String, groceries_id: String): Groceries
     updateSplitCost(split_cost_id: String, event_id: String, input: Split_CostInput): Split_Cost
+    updateActivityIdeaVote(input: UpdateActivityIdeasInput, event_id: String, activity_idea_id: String ): Activity_Ideas
   }
 
 `;

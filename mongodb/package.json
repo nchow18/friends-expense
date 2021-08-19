@@ -5,6 +5,7 @@
   "homepage": "",
   "main": "index.js",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1"
   },

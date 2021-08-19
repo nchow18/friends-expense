@@ -92,9 +92,9 @@ class AuthService {
     if (this.loggedIn() === false) {
       window.location.assign('/');
     } else if (this.getProfileType() === 'user') {
-      window.location.assign('/home');
+      window.location.assign('/account');
     } else if (this.getProfileType() === 'admin') {
-        window.location.assign('/admindashboard');
+        window.location.assign('/account');
     }
   }
 
